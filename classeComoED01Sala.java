@@ -31,23 +31,36 @@ public class classeComoED01Sala {
       sout("Cod: ");
       cod = sc.nextInt();
       sc.nextLine();
+      V[i] = new Disciplina(nome, cod);
    }
 
-      public static void buscarNome(String nome, Disciplina V[]) {
+   public static void buscarNome(String nome, Disciplina V[]) {
 
-         boolean encontrou = false;
+      boolean encontrou = false;
 
-         for (int i = 0; i < V.length; i++) {
-            if (V[i].nome.toLowerCase(); == nome.toLowerCase()) {
-               sout("Nome encontrado ");
-               encontrou = true;
-            }
-         }
-
-         if (!encontrou) {
-            sout("Nome não encontrado)";
+      for (int i = 0; i < V.length; i++) {
+         if (V[i].nome.toLowerCase(); == nome.toLowerCase()) {
+            sout("Nome encontrado ");
+            encontrou = true;
          }
       }
+
+      if (!encontrou) {
+         sout("Nome não encontrado)";
+      }
+   }
+
+   public static void buscarCod (Disciplina V[], int c){
+
+      for (int i = 0; i < V.length; i++) {
+         if (V[i] == c) {
+            sout("Achou");
+         }
+      }
+
+   }
+
+
 
    }
 
