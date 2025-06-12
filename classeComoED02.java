@@ -37,13 +37,14 @@ public class classeComoED02 {
 
         for (int i = 0; i < V.length; i++) {
             System.out.print("Qual o título do livro? ");
-            titulo = sc.next();
+            titulo = sc.nextLine();
             System.out.print("Qual nome do autor? ");
-            autor = sc.next();
+            autor = sc.nextLine();
             System.out.print("Qual o código do livro? ");
             codigo = sc.next();
             System.out.print("Quantos estão disponíveis? ");
             qtdExemplares = sc.nextInt();
+            sc.nextLine();
             System.out.print("---" + "\n");
             V[i] = new Livro(codigo, titulo, autor, qtdExemplares);
         }
@@ -55,20 +56,27 @@ public class classeComoED02 {
         System.out.print("Insira o código do livro para realizar alterações: ");
         cod = sc.next();
 
+        boolean achou = false;
+
         for (int i = 0; i < V.length; i++) {
             if (cod.equalsIgnoreCase(V[i].codigo)) {
                 System.out.println("Realizando alterações...");
                 System.out.print("Qual o título do livro? ");
-                titulo = sc.next();
+                titulo = sc.next().toUpperCase();
                 System.out.print("Qual nome do autor? ");
-                autor = sc.next();
+                autor = sc.next().toUpperCase();
+                System.out.println("Código: " + V[i].codigo);
+                codigo = V[i].codigo.toUpperCase();
                 System.out.print("Quantos estão disponíveis? ");
                 qtdExemplares = sc.nextInt();
                 V[i] = new Livro(codigo, titulo, autor, qtdExemplares);
                 System.out.println("Alterações salvas! ");
-            } else {
-                System.out.println("Código inexistente na biblioteca");
+                achou = true;
             }
+        }
+
+        if (!achou) {
+            System.out.println("Código inexistente na biblioteca!");
         }
 
     }
@@ -76,24 +84,40 @@ public class classeComoED02 {
 
     public static void mostrarDados(Livro V[], int tam, String codigo, String titulo, String autor, int qtdExemplares) {
 
+        System.out.println("EXIBINDO A BIBLIOTECA");
+
         for (int i = 0; i < V.length; i++) {
-        System.out.println("---------------");
-        System.out.println(V[i].titulo); 
-        System.out.println(V[i].autor); 
-        System.out.println(V[i].codigo); 
-        System.out.println(V[i].qtdExemplares); 
-        System.out.println("---------------");
+            System.out.println(V[i].titulo); 
+            System.out.println(V[i].autor); 
+            System.out.println(V[i].codigo); 
+            System.out.println(V[i].qtdExemplares); 
+            System.out.println("---------------");
        }
 
+    }
+
+    public static void ordenarPorTitulo(Livro V[], int tam, String codigo, String titulo, String autor, int qtdExemplares) {
+        System.out.println("BIBLIOTECA ORDENADA POR TÍTULOS");
+        for (int i = 0; i < V.length - 1; i++) {
+            for (int j = i + 1; j < V.length; j++) {
+                if (V[i].titulo.compareToIgnoreCase(V[j].titulo) > 0) {
+                    Livro temp = V[i];
+                    V[i] = V[j];
+                    V[j] = temp;
+                }
+            }
+        }
+        mostrarDados(V, tam, codigo, titulo, autor, qtdExemplares);
     }
 
     public static void main(String[] args) {
         
         criarVetor(null, 0);
         lerVetor(livros, 0, null, null, null, 0);
-        mostrarDados(livros, 0, null, null, null, 0);
+        //mostrarDados(livros, 0, null, null, null, 0);
         editarPorCodigo(livros, null, null, null, null, 0);
         mostrarDados(livros, 0, null, null, null, 0);
+        ordenarPorTitulo(livros, 0, null, null, null, 0);
 
     }
 
