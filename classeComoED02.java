@@ -4,6 +4,7 @@ Escreva métodos para (a) criar o vetor  (b) ler dados  (c ) Editar dados a part
  */
 import java.util.Scanner;
 
+//essa classe cuida individualmente de cada livro
 class Livro {
 
     String codigo;
@@ -23,9 +24,9 @@ class Livro {
 public class classeComoED02 {   
 
     public static Livro[] livros;
-    private int contadorLivros;
-    private static Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
+    //método para inicializar e definir o tamanho do vetor
     public static void criarVetor(Livro V[], int tam) {
         System.out.print("Qual será o tamanho do vetor? ");
         tam = sc.nextInt();
@@ -33,6 +34,7 @@ public class classeComoED02 {
         livros = new Livro[tam];
     }
 
+    //método para inserir os dados do vetor
     public static void lerVetor(Livro V[], int tam, String codigo, String titulo, String autor, int qtdExemplares) {
 
         for (int i = 0; i < V.length; i++) {
@@ -51,6 +53,7 @@ public class classeComoED02 {
         
     }
 
+    //método para selecionar um código e editar as informações presentes nele
     public static void editarPorCodigo (Livro V[], String cod, String codigo, String titulo, String autor, int qtdExemplares) {
 
         System.out.print("Insira o código do livro para realizar alterações: ");
@@ -81,7 +84,7 @@ public class classeComoED02 {
 
     }
     
-
+    //método para imprimir os dados
     public static void mostrarDados(Livro V[], int tam, String codigo, String titulo, String autor, int qtdExemplares) {
 
         System.out.println("EXIBINDO A BIBLIOTECA");
@@ -96,6 +99,7 @@ public class classeComoED02 {
 
     }
 
+    //método para ordenar por título e deixar os dados agrupados na devida posição
     public static void ordenarPorTitulo(Livro V[], int tam, String codigo, String titulo, String autor, int qtdExemplares) {
         System.out.println("BIBLIOTECA ORDENADA POR TÍTULOS");
         for (int i = 0; i < V.length - 1; i++) {
@@ -110,6 +114,7 @@ public class classeComoED02 {
         mostrarDados(V, tam, codigo, titulo, autor, qtdExemplares);
     }
 
+    //rodando os métodos
     public static void main(String[] args) {
         
         criarVetor(null, 0);
