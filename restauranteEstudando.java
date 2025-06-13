@@ -1,21 +1,6 @@
-/*Construa uma classe para armazenar informações de Pratos para um restaurante.
-
-Os dados a serem armazenados para cada prato são:
-
-(i) Código: Um identificador único para o prato (ex: "PRATO001", "VEGAN05").
-(ii) Nome: O nome completo do prato (ex: "Lasanha à Bolonhesa", "Salmão Grelhado com Legumes").
-(iii) Preço: O valor monetário do prato (ex: 45.90, 72.50).
-(iv) Disponível no Menu: Um indicador booleano (true se estiver disponível, false se não estiver).
-Escreva métodos para a classe principal que gerencia o menu do restaurante (MenuRestaurante, por exemplo) para realizar as seguintes operações:
-
-(a) Criar o vetor (array) de pratos: Perguntar ao usuário qual será a capacidade máxima de pratos que o menu poderá armazenar.
-(b) Adicionar um novo prato: Ler os dados de um novo prato (código, nome, preço, disponibilidade) e inseri-lo no vetor. Inclua validação para garantir que o código seja único e que o preço seja um valor positivo.
-(c) Editar dados de um prato: Buscar um prato a partir do seu código e permitir que o usuário altere o nome, preço e/ou disponibilidade.
-(d) Mostrar todos os pratos: Exibir as informações completas de todos os pratos cadastrados no menu.
-(e) Mostrar pratos ordenados por preço: Exibir as informações dos pratos, mas ordenados do mais barato para o mais caro, utilizando o algoritmo Bubble Sort */
+import java.util.Scanner;
 
 class Pratos {
-
     String id;
     String nome;
     double valor;
@@ -27,5 +12,61 @@ class Pratos {
         this.valor = valor;
         this.disponivel = disponivel;
     }
+}
 
+public class restauranteEstudando {
+
+    static Scanner sc = new Scanner(System.in);
+
+    public static Pratos[] MenuRestaurante() {
+        System.out.print("Capacidade máxima para armazenar os pratos: ");
+        int x = sc.nextInt();
+        Pratos[] V = new Pratos[x];
+
+        for (int i = 0; i < V.length; i++) {
+            System.out.print("NOME DO PRATO: ");
+            String nome = sc.next().toUpperCase();
+            System.out.print("ID DO PRATO: ");
+            String id = sc.next();
+            System.out.print("VALOR DO PRATO: ");
+            double valor = sc.nextDouble();
+            System.out.print("DISPONIBILIDADE NO CARDÁPIO (true/false): ");
+            boolean disponivel = sc.nextBoolean();
+
+            V[i] = new Pratos(id, nome, valor, disponivel);
+        }
+
+        return V;
+    }
+
+    public static void editarPorCodigo(Pratos[] V) {
+        sc.nextLine(); // Limpa o buffer
+        System.out.print("QUAL O ID DO PRATO QUE DESEJA EDITAR? ");
+        String x = sc.nextLine();
+        boolean encontrou = false;
+
+        for (int i = 0; i < V.length; i++) {
+            if (x.equalsIgnoreCase(V[i].id)) {
+                System.out.print("NOVO NOME DO PRATO: ");
+                String nome = sc.next().toUpperCase();
+                System.out.print("NOVO VALOR DO PRATO: ");
+                double valor = sc.nextDouble();
+                System.out.print("DISPONIBILIDADE NO CARDÁPIO (true/false): ");
+                boolean disponivel = sc.nextBoolean();
+
+                V[i] = new Pratos(V[i].id, nome, valor, disponivel);
+                encontrou = true;
+                break;
+            }
+        }
+
+        if (!encontrou) {
+            System.out.println("ID não encontrado.");
+        }
+    }
+
+    public static void main(String[] args) {
+        Pratos[] vetorPratos = MenuRestaurante();
+        editarPorCodigo(vetorPratos);
+    }
 }
